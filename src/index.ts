@@ -4,12 +4,10 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.get("/", (req: Request, res: Response) => {
-  const text = "Hello 1!";
+  const text = "Hello 123!";
   res.send(text);
 });
-app.post("/QWEQWE", async (req, res) => {
-  res.sendStatus(200);
-});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
