@@ -1,17 +1,20 @@
 import express, { Request, Response } from "express";
+var bodyParser = require("body-parser");
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-const products = [
+let products = [
   { id: 1, title: "tomato" },
   { id: 2, title: "orange" },
 ];
-const adresses = [
+let adresses = [
   { id: 1, value: "Moscow" },
   { id: 2, value: "USA" },
 ];
 
+const parserMiddleware = bodyParser();
+app.use(parserMiddleware);
 app.get("/", (req: Request, res: Response) => {
   const text = "Hello 1!";
   res.send(text);
@@ -58,10 +61,22 @@ app.delete("/products/:id", (req: Request, res: Response) => {
   }
   res.send(404);
 });
+
 app.post("/products", (req: Request, res: Response) => {
   const newProduct = { id: +new Date(), title: req.body.title };
   products.push(newProduct);
   res.status(201).send(newProduct);
+});
+
+app.put("/products/:id", (req: Request, res: Response) => {
+  let product = products.find((prod) => prod.id === +req.params.id);
+  if (product) {
+    let newProduct = { id: +req.params.id, title: req.body.title };
+    products = [...products, newProduct];
+    res.send(newProduct);
+  } else {
+    res.send(404);
+  }
 });
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
