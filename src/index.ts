@@ -15,6 +15,11 @@ app.get("/products", (req: Request, res: Response) => {
   res.send(products);
 });
 
+app.get("/products/:productTitle", (req: Request, res: Response) => {
+  let product = products.find((prod) => prod.title === req.params.productTitle);
+  res.send(product);
+});
+
 app.get("/adresses", (req: Request, res: Response) => {
   res.send(adresses);
 });
