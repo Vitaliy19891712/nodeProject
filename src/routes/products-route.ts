@@ -27,7 +27,7 @@ productsRouter.delete("/:id", (req: Request, res: Response) => {
   }
 });
 
-productsRouter.post("", (req: Request, res: Response) => {
+productsRouter.post("/", (req: Request, res: Response) => {
   const newProduct = productsRepository.createProducts(req.body.title);
   res.status(201).send(newProduct);
 });

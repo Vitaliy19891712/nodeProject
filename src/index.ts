@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import express from "express";
 import { productsRouter } from "./routes/products-route";
 import { adressesRouter } from './routes/adresses-route';
 var bodyParser = require("body-parser");
