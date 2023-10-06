@@ -23,8 +23,7 @@ export const productsRepository = {
   updateProduct(id: number, title: string) {
     let product = products.find((prod) => prod.id === id);
     if (product) {
-      let newProduct = { id: id, title: title };
-      products = [...products, newProduct];
+      product.title =  title ;
       return true;
     } else {
       return false;
