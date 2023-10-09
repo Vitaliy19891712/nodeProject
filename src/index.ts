@@ -1,7 +1,7 @@
 import express from "express";
 import { productsRouter } from "./routes/products-route";
 import { adressesRouter } from "./routes/adresses-route";
-import { inputValidationMiddleware } from './middlewares/input-validation-middleware';
+import { runDb } from './routes/repositories/db';
 
 let bodyParser = require("body-parser");
 
@@ -13,6 +13,11 @@ app.use(parserMiddleware);
 app.use("/adresses", adressesRouter);
 app.use("/products", productsRouter);
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
-});
+const startApp = async () => {
+  await runDb();
+  app.listen(port, () => {
+    console.log(`Example app listening on port ${port}`);
+  });
+};
+
+startApp();
